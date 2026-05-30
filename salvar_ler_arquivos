@@ -1,7 +1,7 @@
 def salvar():
     caminho = "Documentos/estrada/TCC_PYTHON.txt"
     with open (caminho, "w", encoding = "utf - 8") as arquivo: 
-        dados = "Mãe 16 997664624\nIgor 16 997634624\n"
+        dados = "Mãe 16 9976-0000\nIgor 16 997630000\n"
         arquivo.write(dados)
 
 def ler():
