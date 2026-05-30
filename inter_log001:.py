@@ -13,7 +13,7 @@ class Farmacia:
             self.qtd -= valor
             
         else:
-            return "Valor invalido111111"
+            return "Valor invalido"
 
     
     def exibir(self):
@@ -40,11 +40,6 @@ class Farmacia:
             return "Valor invalido"
         
     
-    
-         
-        
-
-
 estoque = {}
 
 ##logica##
