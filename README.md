@@ -6,17 +6,17 @@ Aqui vou reunir códigos, exercícios e pequenos projetos que desenvolvo ao long
 
 ## Objetivo
 
-- Melhorar a lógica de programação  
-- Praticar conceitos fundamentais e mais avançados  
-- Simular situações reais de desenvolvimento  
+ Melhorar a lógica de programação  
+ Praticar conceitos fundamentais e mais avançados  
+ Simular situações reais de desenvolvimento  
 
 ## Conteúdo
 
-- Códigos simples  
-- Exercícios de lógica  
-- Projetos intermediários  
-- Projetos mais completos ao longo do tempo  
+ Códigos simples  
+ Exercícios de lógica  
+ Projetos intermediários  
+ Projetos mais completos ao longo do tempo  
 
 ## Observação
 
-Este repositório faz parte do meu processo de aprendizado e evolução como desenvolvedor.
+ Este repositório faz parte do meu processo de aprendizado e evolução como desenvolvedor.
