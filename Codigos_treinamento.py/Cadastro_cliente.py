@@ -52,6 +52,7 @@ class Interface:
 4 - DEPOSITO
 5 - ALTERAR NOME
 6 - SALVAR
+7 - LER ARQUIVO
     --->>>"""))
             except ValueError:
                 print("SOMENTE NUMEROS")
@@ -166,10 +167,16 @@ class Interface:
     def salvar(self):
         with open("/home/igor/Projetos_em_python/Codigos_treinamento.py/Lista_Clientes.txt", "w", encoding = "utf=8") as arquivo:  
             for chave, valor in self.conexao.historico.items():
-                linha = f"CPF: {chave}\nNome {valor.titular}\nSaldo R${valor.saldo}\n===============" 
+                linha = f"\nCPF: {chave}\nNome {valor.titular}\nSaldo R${valor.saldo}\n===============\n" 
                 arquivo.write(linha)
-        print("FINALIZADO")
+        print("SALVO")
               
+    def ler(self):
+        with open("/home/igor/Projetos_em_python/Codigos_treinamento.py/Lista_Clientes.txt", "r", encoding = "utf-8") as arquivo:
+            print("=========|CONTEUDO|=========")
+            conteudo = arquivo.read()
+            print(conteudo)
+    
 
 bd = BancoDados()
 interacao = Interface(bd)
@@ -181,7 +188,7 @@ while True:
         print("Encerrando")
         break
     
-    if opcao in [1,2,3,4,5,6]:
+    if opcao in [1,2,3,4,5,6,7]:
         if opcao == 1:
             interacao.adicionar()
         elif opcao == 2:
@@ -194,8 +201,10 @@ while True:
             interacao.alterar_nome()
         elif opcao == 6:
             interacao.salvar()
+        elif opcao == 7:
+            interacao.ler()
     else:
-        print("Somente valores entre 0 até 6")
+        print("Somente valores entre 0 até 7")
         
         
         
