@@ -149,10 +149,9 @@ while True:
     if opcao in [1,2]:
         if opcao == 2:
             print(interacao.conexao.desligar())
-            print("")
+           
     
         elif opcao == 1:
-            print("")
             print(interacao.conexao.ligar())
             interacao.exibir_situação()
             print("")

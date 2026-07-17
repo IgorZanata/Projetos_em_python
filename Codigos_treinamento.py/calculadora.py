@@ -13,7 +13,6 @@ class Calculadora:
         
         try:
             return a / b
-        
         except ZeroDivisionError:
             return None
         
@@ -21,8 +20,20 @@ class Banco_Dados:
     def __init__(self):
         self.historico = []
         
-    def exibir(self):
-        print(f"Valores: {self.historico}")
+    def ler_arquivo(self):
+        print("========| ITENS SALVOS |==========")
+        with open ("Projetos_em_python/Codigos_treinamento.py/Resutados_Operações.txt", "r", encoding="utf-8") as arquivo:
+            leitura = arquivo.read()
+            print(leitura)
+        print("==================================")
+        
+    def salvar(self,a,b,operacao,resultado):
+        caminho = "Projetos_em_python/Codigos_treinamento.py/Resutados_Operações.txt"
+        with open(caminho, "a",encoding="utf-8")as arquivo:
+            linha = f"{a} {operacao} {b} = {resultado}\n------------\n"
+            arquivo.write(linha)
+        print("SALVO COM SUCESSO")
+                
         
 class Interacao:
     def __init__(self,banco,calc):
@@ -53,8 +64,8 @@ class Interacao:
 ))
             except ValueError:
                 print("Somente Numeros")
-                
-
+ 
+           
 ca = Calculadora()
 bd = Banco_Dados()
 
@@ -74,25 +85,29 @@ while True:
         
         if opcao == 1:
             resultado = interface.calc.somar(valor1,valor2)
+            operacao ="+"
             print(resultado)
         
         elif opcao == 2:
             resultado = interface.calc.subtrair(valor1,valor2)
+            operacao ="-"
             print(resultado)
         
         elif opcao == 3:
             resultado = interface.calc.multiplicar(valor1,valor2)
+            operacao ="*" 
             print(resultado)
             
         elif opcao == 4:
+            operacao ="/"
             resultado = interface.calc.dividir(valor1,valor2)
             print(resultado)
         
         interface.banco.historico.append(resultado)
-        
+        interface.banco.salvar(valor1,valor2,operacao,resultado)
         
     elif opcao == 5:
-        interface.banco.exibir()
+        interface.banco.ler_arquivo()
         
     
     else:
