@@ -21,17 +21,19 @@
 #Exibe se o aparelho está ligado ou desligado.
 
 class Termometro:
-    def __init__(self, temperatura):
-        if temperatura >= 16 and temperatura <= 30:
-            self.__temperatura = temperatura
+    def __init__(self,temperatura_inicial):   
+            self.__temperatura = temperatura_inicial
             self.ligado = False
-        else:
-            raise ValueError ("erro")
-
+            
+            
     @property
     def valor(self):
         return f"Temperatura {self.__temperatura }ºC"
-
+    
+    @property
+    def valor_numerico(self):
+        return self.__temperatura
+    
     def ligar(self):
         if self.ligado == False:
             self.ligado = True
@@ -59,7 +61,7 @@ class Termometro:
             return "Limite maximo 30°C"   
         else:
             self.__temperatura += 1
-            return f"{self.valor}"
+            return f"TEMPERATURA:{self.__temperatura}"
 
     def baixar(self):
         if not self.ligado:
@@ -73,12 +75,10 @@ class Termometro:
 class Interface:
     def __init__(self,conexao):
         self.conexao = conexao 
-    
-    
+
     def exibir_situação(self):
         print(f"======TEMPERATURA ATUAL======")
-        print(self.conexao.situacao())
-        print(self.conexao.valor)
+        print(self.conexao.situacao(), f"\n",self.conexao.valor)
     
     def menu_ligar(self):
         while True:
@@ -91,37 +91,83 @@ class Interface:
                 print("Somente a opcao 1 e 2")
                 
     def menu_temperatura(self):
-            return input(" [+] AUMENTAR\n [-] BAIXAR\n [S] SAIR\n>>>").strip().upper()
+        while True:
+            valor = input(" [+] AUMENTAR\n [-] BAIXAR\n [S] SAIR\n>>>").strip().upper()
+            if valor in ["+", "-","S"]:
+                return valor
+            else:
+                print("Somente os valores [+] | [-] | [S]")
         
-ter = Termometro(20)
+    def aumentar_temperatura(self): 
+        while True:
+            opcao = input("[+] AUMENTAR\n[S] VOLTAR MENU\n:").strip().upper()
+                
+            if opcao =="+":
+                self.conexao.aumento()
+                print(self.conexao.valor)
+                if self.conexao.valor_numerico == 30:
+                    print("LIMITE MÁXIMO DE 30º ATINGIDO")
+            elif opcao =="S":
+                return
+            else:
+                print("Digite novamente as opcões [+] / [S] ")
+       
+    def baixar_temperatura(self):
+        while True:
+            opcao = input("[-] BAIXAR\n[S] VOLTAR MENU\n:").strip().upper()
+            if opcao =="-":
+                self.conexao.baixar()
+                print(self.conexao.valor)
+                if self.conexao.valor_numerico == 16:
+                    print("LIMINE MINIMO DE 16 ºC ATINGIDO ")
+            elif opcao =="S":
+                return
+            else:
+                print("Digite novamente as opções [-] / [S]")
+
+def valor_inicial_temperatura():
+    while True:
+        try:    
+            valor = int(input("Valor temperatura inicial:"))  
+            if valor >= 16 and valor <=30:   
+                return valor
+            else:
+                print("Valores entre 15 °C até 30 ºC")
+        except ValueError:
+            print("Somente numeros") 
+
+valor = valor_inicial_temperatura()
+print("")
+ter = Termometro(valor)
 interacao = Interface(ter)
 
 while True:
     interacao.exibir_situação()
     opcao = interacao.menu_ligar()
-    if opcao == 2:
-        ter.desligar()
+    print("")
     
-    if opcao == 1:
-        ter.ligar()
-        
-        interacao.exibir_situação()
-        opcao2 = interacao.menu_temperatura()
-        
-        if opcao2 =="+":
-            ter.aumento()
+    if opcao in [1,2]:
+        if opcao == 2:
+            print(interacao.conexao.desligar())
+            print("")
+    
+        elif opcao == 1:
+            print("")
+            print(interacao.conexao.ligar())
             interacao.exibir_situação()
+            print("")
             
-        elif opcao2 =="-":
-            interacao.baixar()
-            print(ter.valor)
-
-        elif opcao2 =="S":
-            print("SAINDO")
-            break        
-        else:
-            print("Valor invalido\nDigite Novamente")
-        break
+            while True:
+                opcao2 = interacao.menu_temperatura()
+                if opcao2 =="+":
+                    interacao.aumentar_temperatura()  
+                elif opcao2 =="-":
+                    interacao.baixar_temperatura()
+                elif opcao2 =="S":
+                    print("SAINDO")
+                    break  
+                else:
+                    print("Valor invalido\nDigite Novamente")
     else:
         print("Somente valores entre 1 e 2\nDigite Novamente")
             
