@@ -1,16 +1,3 @@
-#1. Criar a Classe Venda
-#Definir o método __init__ com os atributos: id_venda (int), data (str), produto (str), quantidade (int) e preco_unitario (float).
-#Criar o método calcular_faturamento() que retorna a multiplicação de quantidade por preco_unitario.
-#2. Criar a Classe GerenciadorDeVendas
-#Inicializar o atributo vendas como uma lista vazia no __init__.
-#Implementar o método carregar_csv(caminho_arquivo) para ler o CSV nativo (ex: csv.DictReader), converter os tipos numéricos e instanciar objetos Venda na lista.
-#Implementar o método faturamento_total() para somar o faturamento de todas as vendas.
-#Implementar o método produto_mais_vendido() para identificar o produto com maior quantidade acumulada.
-#Implementar o método exportar_resumo_csv(caminho_saida) para gravar o novo arquivo CSV com as colunas Produto e Faturamento_Total_Produto usando csv.writer.
-#3. Execução e Teste
-#Criar o arquivo de entrada vendas.csv com os dados de teste fornecidos.
-#Instanciar o GerenciadorDeVendas, carregar os dados e exibir o faturamento total e o produto mais vendido no terminal.
-#Verificar se o arquivo resumo_vendas.csv foi gerado corretamente após a execução.
 
 import csv
 
